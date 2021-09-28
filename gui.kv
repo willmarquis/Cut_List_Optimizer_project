@@ -1,0 +1,230 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+
+<Label>
+    font_size: 32
+    text_size: self.size
+    halign: "center"
+    valign: "middle"
+    markup: True
+
+<TitleLabel@Label>
+    font_size: 48
+    halign: "center"
+    valign: "middle"
+    markup: True
+    bold: True
+    size_hint: (1, 0.15)
+    pos_hint: {"top": 1, "left": 1}
+
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<BackgroundLabel@Label+BackgroundColor>
+    background_color: 0, 0, 0, 0
+
+<MenuButton@Button>
+    font_size: 32
+
+<ScrollableLabel@ScrollView>
+    text: str("")
+    BackgroundLabel: 
+        text: root.text
+        font_size: 24
+        halign: "left"
+        background_color: 1, 1, 1, 1
+        color: "black"
+        text_size: self.width, None
+        size_hint_y: None
+        height: self.texture_size[1]
+
+
+WindowManager:
+    canvas.before:
+        BorderImage:
+            source: "images\\dark_lumber_background.jpg"
+            pos: self.pos
+            size: self.size
+    transition: NoTransition()
+    MenuWindow:
+    LinWindow:
+    TwoDWindow:
+    CutsWindow:
+    StocksWindow:
+
+<MenuWindow>
+    name: "menu"
+
+    FloatLayout:
+        size: root.width, root.height
+
+        TitleLabel:
+            id: "menu_title"
+            text: "Welcome to the\n[b]Cut List Optimizer project[/b]"
+            bold: False
+
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            size_hint: (0.5, 0.6)
+            pos_hint: {"x": 0.05, "top": 0.8}
+
+            Label:
+                text: "[b]Choose the type of cut desired[/b]"
+
+            MenuButton:
+                text: "One Dimensionnal"
+                on_release: 
+                    app.root.current = "lin_window"
+
+            MenuButton:
+                text: "Two Dimensionnal"
+                on_release: 
+                    app.root.current = "2D_window"
+
+<LinWindow>
+    name: "lin_window"
+    
+    FloatLayout:
+        size: root.width, root.height
+
+        TitleLabel:
+            text: "Linear mode"
+
+        FloatLayout:
+            size_hint: (0.8, 0.35)
+            pos_hint: {"x": 0.1, "top": 0.825}
+
+            Label:
+                text: "List of cuts"
+                halign: "left"
+                size_hint: (1, 0.15)
+                pos_hint: {"x": 0, "top": 1}
+
+            ScrollableLabel:
+                text: "Some really long string\n" *20
+                size_hint: (1, 0.65)
+                pos_hint: {"x": 0, "top": 0.825}
+
+            Button:
+                text: "Add a cut"
+                font_size: 24
+                size_hint: (0.25, 0.15)
+                pos_hint: {"x": 0.75, "top": 0.15}
+                on_release: 
+                    app.root.current = "cuts_window"
+
+        FloatLayout:
+            size_hint: (0.8, 0.35)
+            pos_hint: {"x": 0.1, "top": 0.45}
+
+            Label:
+                text: "List of stocks"
+                halign: "left"
+                size_hint: (1, 0.15)
+                pos_hint: {"x": 0, "top": 1}
+
+            ScrollableLabel:
+                text: "Some really long string\n" *20
+                size_hint: (1, 0.65)
+                pos_hint: {"x": 0, "top": 0.825}
+
+            Button:
+                text: "Add a stock"
+                font_size: 24
+                size_hint: (0.25, 0.15)
+                pos_hint: {"x": 0.75, "top": 0.15}
+                on_release: 
+                    app.root.current = "stocks_window"
+
+        Button:
+            text: "Options"
+            font_size: 24
+            size_hint: (0.2, 0.05)
+            pos_hint: {"x": 0.58, "top": 0.06}
+
+        Button:
+            text: "Generate list"
+            font_size: 24
+            size_hint: (0.2, 0.05)
+            pos_hint: {"x": 0.79, "top": 0.06}
+
+        Button:
+            text: "Menu"
+            font_size: 24
+            size_hint: (0.1, 0.05)
+            pos_hint: {"x": 0.01, "top": 0.06}
+            on_release: 
+                app.root.current = "menu"
+
+<TwoDWindow>
+    name: "2D_window"
+
+    FloatLayout:
+        size: root.width, root.height
+
+        TitleLabel:
+            text: "2D Mode"
+
+        Label:
+            text: "NOT YET\nIMPLEMENTED"
+            size_hint: (1, 0.5)
+            pos_hint: {"left": 1, "top": 0.75}
+        
+        Button:
+            text: "Menu"
+            font_size: 16
+            size_hint: (0.1, 0.05)
+            pos_hint: {"x": 0.01, "top": 0.06}
+            on_release: 
+                app.root.current = "menu"
+
+<CutsWindow>
+    name: "cuts_window"
+
+    FloatLayout:
+        size: root.width, root.height
+
+        TitleLabel:
+            text: "Adding a cut"
+
+        Label:
+            text: "NOT YET\nIMPLEMENTED"
+            size_hint: (1, 0.5)
+            pos_hint: {"left": 1, "top": 0.75}
+        
+        Button:
+            text: "Cancel"
+            font_size: 16
+            size_hint: (0.1, 0.05)
+            pos_hint: {"x": 0.01, "top": 0.06}
+            on_release: 
+                app.root.current = "lin_window"
+
+<StocksWindow>
+    name: "stocks_window"
+
+    FloatLayout:
+        size: root.width, root.height
+
+        TitleLabel:
+            text: "Adding a stock"
+
+        Label:
+            text: "NOT YET\nIMPLEMENTED"
+            size_hint: (1, 0.5)
+            pos_hint: {"left": 1, "top": 0.75}
+        
+        Button:
+            text: "Cancel"
+            font_size: 16
+            size_hint: (0.1, 0.05)
+            pos_hint: {"x": 0.01, "top": 0.06}
+            on_release: 
+                app.root.current = "lin_window"
+
