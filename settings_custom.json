@@ -1,0 +1,20 @@
+[
+    { "type": "title",
+      "title": "Test application" },
+
+    { "type": "options",
+      "title": "Type of optimization",
+      "desc": "Choose between the different optimization types available",
+      "section": "OptSection",
+      "key": "opt_type",
+      "options": ["Losses", "Price"] },
+      
+    { "type": "options",
+      "title": "Favorite retailer",
+      "desc": "Choose the retailer that should be prioritized",
+      "section": "OptSection",
+      "key": "retailer",
+      "options": ["None"] }
+
+      
+]

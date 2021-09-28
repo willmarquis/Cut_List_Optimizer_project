@@ -1,8 +1,10 @@
 #: import NoTransition kivy.uix.screenmanager.NoTransition
+#:import Factory kivy.factory.Factory
 
 <Label>
+    text_size: root.width, None
+    size: self.texture_size
     font_size: 32
-    text_size: self.size
     halign: "center"
     valign: "middle"
     markup: True
@@ -43,6 +45,28 @@
         size_hint_y: None
         height: self.texture_size[1]
 
+# <OptPopup>
+#     auto_dismiss: False
+#     size_hint: (0.9, 0.9)
+#     title: "OPTIONS"
+#     #title_align: "center"
+    
+#     FloatLayout:
+#         size: root.width, root.height
+        
+#         Button:
+#             text: "Cancel"
+#             font_size: 20
+#             size_hint: (0.15, 0.05)
+#             pos_hint: {"x": 0.68, "top": 0.06}
+#             on_release: root.cancel()
+
+#         Button:
+#             text: "Save"
+#             font_size: 20
+#             size_hint: (0.15, 0.05)
+#             pos_hint: {"x": 0.84, "top": 0.06}
+#             on_release: root.save()
 
 WindowManager:
     canvas.before:
@@ -86,6 +110,13 @@ WindowManager:
                 text: "Two Dimensionnal"
                 on_release: 
                     app.root.current = "2D_window"
+
+        Button:
+            text: "Exit"
+            font_size: 24
+            size_hint: (0.2, 0.075)
+            pos_hint: {"x": 0.79, "top": 0.085}
+            on_release: app.stop()
 
 <LinWindow>
     name: "lin_window"
@@ -147,6 +178,7 @@ WindowManager:
             font_size: 24
             size_hint: (0.2, 0.05)
             pos_hint: {"x": 0.58, "top": 0.06}
+            on_release: app.open_settings()
 
         Button:
             text: "Generate list"
