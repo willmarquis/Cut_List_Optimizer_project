@@ -1,5 +1,3 @@
-import math
-
 class retailer():
     def __init__(self, name, URL, favorite=False):
         self.info = {
@@ -7,9 +5,16 @@ class retailer():
             "URL" : URL,
             "favorite" : favorite
         }
+        self.stock = {}
     
     def get_info(self):
         return self.info
+    
+    def get_stock(self, category):
+        if self.get(category):
+            return self.stock[category]
+        else:
+            return "Category not found"
 
     def add_stock(self):
         pass
@@ -18,9 +23,6 @@ class retailer():
         pass
 
     def update_stock(self):
-        pass
-
-    def get_stock(self):
         pass
 
     def update_favorite(self, status):
