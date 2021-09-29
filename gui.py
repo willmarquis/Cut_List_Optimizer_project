@@ -36,9 +36,6 @@ kv_builder = Builder.load_file("gui.kv")
 class CutListOptimizer(App):
     use_kivy_settings = False
 
-    # def __init__(self, **kwargs):
-    #     super(CutListOptimizer, self).__init__(**kwargs)
-
     def get_application_config(self):
         return super(CutListOptimizer, self).get_application_config(
             "%(appdir)s/cutlist_settings.ini")
@@ -63,8 +60,7 @@ class CutListOptimizer(App):
         if config is self.config:
             token = (section, key)
             if token == ("OptSection", "opt_type"):
-                print("Optimization type was ", self.opt_type)
-                print("Optimization type has been changed to", value)
+                self.opt_type = value
 
 if __name__ == "__main__":
     CutListOptimizer().run()
