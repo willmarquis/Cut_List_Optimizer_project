@@ -54,7 +54,7 @@ class CutListOptimizer(App):
         self.opt_type = self.config.get("OptSection", "opt_type")
 
     def build_settings(self, settings):
-        settings.add_json_panel('Custom', self.config, 'settings_custom.json')
+        settings.add_json_panel("CutList Settings", self.config, "settings_custom.json")
 
     def on_config_change(self, config, section, key, value):
         if config is self.config:

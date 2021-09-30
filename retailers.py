@@ -9,20 +9,52 @@ class retailer():
     
     def get_info(self):
         return self.info
+
+    def get_stock(self):
+        return self.stock
     
-    def get_stock(self, category):
-        if self.get(category):
+    def get_category(self, category):
+        if self.stock.get(category):
             return self.stock[category]
         else:
             return "Category not found"
 
-    def add_stock(self):
-        pass
+    def add_stock(self, category, length, price):
+        if self.stock.get(category):
+            stocks = self.stock.get(category)
+            for len in stocks:
+                if len[0] is length:
+                    stocks.remove(len)
+                    break
+            stocks.append((length, price))
+            self.stock.update({category : stocks})
+        else:
+            new_stock = {category : [(length, price)]}
+            self.stock.update(new_stock)
+    
+    def remove_stock(self, category):
+        if self.stock.get(category):
+            self.stock.pop(category)
+        else:
+            return "Category not found"
 
-    def remove_stock(self):
-        pass
+    def remove_length(self, category, length):
+        if self.stock.get(category):
+            stocks = self.stock.get(category)
+            for len in stocks:
+                if len[0] is length:
+                    stocks.remove(len)
+                    self.stock.update({category : stocks})
+                    break
+                else:
+                    return "Length not found"
+        else:
+            return "Category not found"
 
-    def update_stock(self):
+    def clear_stock(self):
+        self.stock = {}
+
+    def update_price(self):
         pass
 
     def update_favorite(self, status):
@@ -69,7 +101,7 @@ if __name__ == '__main__':
     # homedepot = retails.get_retailer("home depot")
     # print(homedepot.get_info(), "\n")
     
-    # #print(retails.items())
+    #print(retails.items())
 
     # retails.add_favorite("rona")
 
@@ -79,4 +111,17 @@ if __name__ == '__main__':
     # retails.add_favorite("home depot")
 
     # print(rona.get_info())
-    # print(homedepot.get_info())
+    # print(homedepot.get_info(), "\n")
+
+    # rona.add_stock("2x4", 10, 3.50)
+    # print("Rona 2x4 stocks are: ", rona.get_category("2x4"))
+    
+    # rona.add_stock("2x4", 12, 4.25)
+    # print("Rona 2x4 stocks are: ", rona.get_category("2x4"))
+
+    # rona.add_stock("2x6", 12, 4.50)
+    # print("Rona 2x6 stocks are: ", rona.get_category("2x6"))
+
+    # print("Rona's stock is: ", rona.get_stock())
+    # rona.clear_stock()
+    # print("Rona's stock is: ", rona.get_stock())
